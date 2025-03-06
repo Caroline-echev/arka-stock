@@ -27,4 +27,9 @@ public class CategoryAdapter implements ICategoryPersistencePort {
         return categoryEntityMapper.categoryEntityToCategory(categoryRepository.findByName(name));
     }
 
+    @Override
+    public List<Category> findAllCategories() {
+        return categoryRepository.findAll().stream().map(categoryEntityMapper::categoryEntityToCategory).toList();
+    }
+
 }

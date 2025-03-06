@@ -8,5 +8,5 @@ import java.util.List;
 public interface ICategoryPersistencePort {
     Category saveCategory(Category category);
     Category findByName(String name);
-
+    List<Category>  findAllCategories();
 }
