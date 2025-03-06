@@ -3,6 +3,7 @@ package com.project_arka.stock.configuration.exceptionhandler;
 import com.project_arka.stock.domain.exception.BrandAllreadyExistsException;
 import com.project_arka.stock.domain.exception.BrandInvalidException;
 import com.project_arka.stock.domain.exception.BrandNotFoundException;
+import com.project_arka.stock.domain.exception.EmptyBrandListException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,12 @@ public class ControllerAdvisor {
     public ResponseEntity<ExceptionCodeResponse> handleBrandInvalidException(BrandInvalidException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                 new ExceptionCodeResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), HttpStatus.BAD_REQUEST.name(), LocalDateTime.now())
+        );
+    }
+    @ExceptionHandler(EmptyBrandListException.class)
+    public ResponseEntity<ExceptionCodeResponse> handleEmptyBrandListException(EmptyBrandListException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                new ExceptionCodeResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage(), HttpStatus.NOT_FOUND.name(), LocalDateTime.now())
         );
     }
 }

@@ -6,6 +6,8 @@ import com.project_arka.stock.ports.driven.jpa.mysql.mapper.IBrandEntityMapper;
 import com.project_arka.stock.ports.driven.jpa.mysql.repository.IBrandRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 public class BrandAdapter implements IBrandPersistencePort {
     private final IBrandRepository brandRepository;
@@ -19,5 +21,10 @@ public class BrandAdapter implements IBrandPersistencePort {
     @Override
     public Brand findByName(String name) {
         return brandEntityMapper.brandEntityToBrand(brandRepository.findByName(name));
+    }
+
+    @Override
+    public List<Brand> findAllBrands() {
+        return brandRepository.findAll().stream().map(brandEntityMapper::brandEntityToBrand).toList();
     }
 }
