@@ -22,15 +22,19 @@ public class BrandController {
     public ResponseEntity<BrandResponse> createBrand(@RequestBody @Valid BrandRequest brandRequest) {
         return ResponseEntity.ok(brandMapperDto.brandToBrandResponse(brandServicePort.createBrand(brandMapperDto.brandToBrandRequest(brandRequest))));
     }
-
-    @GetMapping("/{asc}")
-    public ResponseEntity<List<BrandResponse>> findAllBrands(@PathVariable boolean asc) {
+    @GetMapping
+    public ResponseEntity<List<BrandResponse>> findAllBrands(@RequestParam(defaultValue = "true") boolean asc) {
         List<BrandResponse> brandResponses = brandServicePort.findAllBrands(asc)
                 .stream()
                 .map(brandMapperDto::brandToBrandResponse)
                 .toList();
 
         return ResponseEntity.ok(brandResponses);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BrandResponse> findBrandById(@PathVariable Long id) {
+        return ResponseEntity.ok(brandMapperDto.brandToBrandResponse(brandServicePort.findBrandById(id)));
     }
 
 }

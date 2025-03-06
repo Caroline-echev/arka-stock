@@ -8,4 +8,5 @@ public interface IBrandPersistencePort {
     Brand createBrand(Brand brand);
     Brand findByName(String name);
     List<Brand> findAllBrands();
+    Brand findBrandById(Long id);
 }

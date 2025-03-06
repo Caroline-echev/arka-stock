@@ -34,7 +34,7 @@ public class Brand {
         if (name.length() > BRAND_NAME_MAX_LENGTH) {
             throw new BrandInvalidException(BRAND_NAME_LENGTH_EXCEPTION_MESSAGE);
         }
-        if (name.matches("\\d+")) {
+        if (name.matches(NUMBER_PATTERN)) {
             throw new BrandInvalidException(BRAND_NAME_NUMBER_EXCEPTION_MESSAGE);
         }
         this.name = name;

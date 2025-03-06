@@ -27,4 +27,9 @@ public class BrandAdapter implements IBrandPersistencePort {
     public List<Brand> findAllBrands() {
         return brandRepository.findAll().stream().map(brandEntityMapper::brandEntityToBrand).toList();
     }
+
+    @Override
+    public Brand findBrandById(Long id) {
+        return brandEntityMapper.brandEntityToBrand(brandRepository.findById(id).orElse(null));
+    }
 }
