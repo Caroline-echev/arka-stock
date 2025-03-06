@@ -15,23 +15,22 @@ import static com.project_arka.stock.domain.util.DomainConstants.*;
 
 @RequiredArgsConstructor
 public class BrandUseCase implements IBrandServicePort {
+
     private  final IBrandPersistencePort brandPersistencePort;
     @Override
     public Brand createBrand(Brand brand) {
         if(brandPersistencePort.findByName(brand.getName()) != null)
             throw new BrandAllreadyExistsException(BRAND_ALREADY_EXISTS_EXCEPTION_MESSAGE);
 
-        return brandPersistencePort.createBrand(brand);
+        return brandPersistencePort.saveBrand(brand);
     }
 
     @Override
     public List<Brand> findAllBrands(Boolean asc) {
         List<Brand> brands = brandPersistencePort.findAllBrands();
-
         if (brands == null || brands.isEmpty()) {
             throw new EmptyBrandListException(BRAND_LIST_EMPTY_EXCEPTION_MESSAGE);
         }
-
         return sortBrands(brands, asc);
     }
 
@@ -42,6 +41,16 @@ public class BrandUseCase implements IBrandServicePort {
             throw new BrandNotFoundException(BRAND_NOT_FOUND_EXCEPTION_MESSAGE);
         }
         return brand;
+    }
+
+    @Override
+    public Brand updateBrand(Brand brand, Long id) {
+        if(brandPersistencePort.findBrandById(id) == null){
+            throw new BrandNotFoundException(BRAND_NOT_FOUND_EXCEPTION_MESSAGE);
+        }
+        brand.setId(id);
+        return brandPersistencePort.saveBrand(brand);
+
     }
 
     private List<Brand> sortBrands(List<Brand> brands, Boolean asc) {

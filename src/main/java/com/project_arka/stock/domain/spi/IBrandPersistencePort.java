@@ -5,7 +5,7 @@ import com.project_arka.stock.domain.model.Brand;
 import java.util.List;
 
 public interface IBrandPersistencePort {
-    Brand createBrand(Brand brand);
+    Brand saveBrand(Brand brand);
     Brand findByName(String name);
     List<Brand> findAllBrands();
     Brand findBrandById(Long id);

@@ -37,4 +37,9 @@ public class BrandController {
         return ResponseEntity.ok(brandMapperDto.brandToBrandResponse(brandServicePort.findBrandById(id)));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<BrandResponse> updateBrand(@RequestBody @Valid BrandRequest brandRequest, @PathVariable Long id) {
+        return ResponseEntity.ok(brandMapperDto.brandToBrandResponse(brandServicePort.updateBrand(brandMapperDto.brandToBrandRequest(brandRequest), id)));
+    }
+
 }

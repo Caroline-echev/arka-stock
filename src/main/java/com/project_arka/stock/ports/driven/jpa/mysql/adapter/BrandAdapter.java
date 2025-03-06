@@ -14,7 +14,7 @@ public class BrandAdapter implements IBrandPersistencePort {
     private final IBrandEntityMapper brandEntityMapper;
 
     @Override
-    public Brand createBrand(Brand brand) {
+    public Brand saveBrand(Brand brand) {
         return brandEntityMapper.brandEntityToBrand(brandRepository.save(brandEntityMapper.brandToBrandEntity(brand)));
     }
 
