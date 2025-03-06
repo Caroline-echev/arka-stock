@@ -7,4 +7,5 @@ import java.util.List;
 public interface IBrandServicePort {
     Brand createBrand(Brand brand);
     List<Brand> findAllBrands(Boolean asc);
+    Brand findBrandById(Long id);
 }
