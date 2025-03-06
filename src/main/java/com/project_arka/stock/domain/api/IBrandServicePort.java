@@ -8,4 +8,5 @@ public interface IBrandServicePort {
     Brand createBrand(Brand brand);
     List<Brand> findAllBrands(Boolean asc);
     Brand findBrandById(Long id);
+    Brand updateBrand(Brand brand, Long id);
 }
