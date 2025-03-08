@@ -9,4 +9,5 @@ public interface ICategoryPersistencePort {
     Category saveCategory(Category category);
     Category findByName(String name);
     List<Category>  findAllCategories();
+    Category findCategoryById(Long id);
 }

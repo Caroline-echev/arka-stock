@@ -31,7 +31,11 @@ public class CategoryController {
                 .stream()
                 .map(categoryMapperDto::categoryToCategoryResponse)
                 .toList();
-
         return ResponseEntity.ok(categoryResponses);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryResponse> findCategoryById(@PathVariable Long id) {
+        return ResponseEntity.ok(categoryMapperDto.categoryToCategoryResponse(categoryServicePort.findCategoryById(id)));
     }
 }

@@ -9,6 +9,7 @@ public class DomainConstants {
     public static final String BRAND_NAME_LENGTH_EXCEPTION_MESSAGE = "El nombre no puede exceder los 60 caracteres";
     public static final String BRAND_DESCRIPTION_LENGTH_EXCEPTION_MESSAGE = "La descripción no puede exceder los 200 caracteres";
     public static final String BRAND_LIST_EMPTY_EXCEPTION_MESSAGE = "La lista de marcas esta vacia";
+    public static final String CATEGORY_NOT_FOUND_EXCEPTION_MESSAGE = "La categoria no existe";
 
     public static final String CATEGORY_ALREADY_EXISTS_EXCEPTION_MESSAGE = "La categoria ya existe";
     public static final String CATEGORY_NAME_EMPTY_EXCEPTION_MESSAGE = "La categoria no puede estar vacia";
