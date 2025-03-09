@@ -46,10 +46,10 @@ public class Brand {
 
     public void setDescription(String description) {
         if (description == null || description.trim().isEmpty()) {
-            throw new IllegalArgumentException(BRAND_DESCRIPTION_EMPTY_EXCEPTION_MESSAGE);
+            throw new BrandInvalidException(BRAND_DESCRIPTION_EMPTY_EXCEPTION_MESSAGE);
         }
         if (description.length() > BRAND_DESCRIPTION_MAX_LENGTH) {
-            throw new IllegalArgumentException(BRAND_DESCRIPTION_LENGTH_EXCEPTION_MESSAGE);
+            throw new BrandInvalidException(BRAND_DESCRIPTION_LENGTH_EXCEPTION_MESSAGE);
         }
         this.description = description;
     }

@@ -6,6 +6,7 @@ import com.project_arka.stock.ports.driving.http.dto.response.BrandResponse;
 import com.project_arka.stock.ports.driving.http.mapper.IBrandMapperDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,10 @@ public class BrandController {
 
     @PostMapping("/")
     public ResponseEntity<BrandResponse> createBrand(@RequestBody @Valid BrandRequest brandRequest) {
-        return ResponseEntity.ok(brandMapperDto.brandToBrandResponse(brandServicePort.createBrand(brandMapperDto.brandToBrandRequest(brandRequest))));
+        return  ResponseEntity.status(HttpStatus.CREATED).body(brandMapperDto.brandToBrandResponse(brandServicePort.createBrand(brandMapperDto.brandToBrandRequest(brandRequest))));
+
     }
+
     @GetMapping
     public ResponseEntity<List<BrandResponse>> findAllBrands(@RequestParam(defaultValue = "true") boolean asc) {
         List<BrandResponse> brandResponses = brandServicePort.findAllBrands(asc)

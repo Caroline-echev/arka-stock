@@ -2,7 +2,6 @@ package com.project_arka.stock.domain.api.usecase;
 
 import com.project_arka.stock.domain.api.ICategoryServicePort;
 import com.project_arka.stock.domain.exception.*;
-import com.project_arka.stock.domain.model.Brand;
 import com.project_arka.stock.domain.model.Category;
 import com.project_arka.stock.domain.spi.ICategoryPersistencePort;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,7 @@ public class CategoryUseCase implements ICategoryServicePort {
     public List<Category> findAllCategories(Boolean asc) {
         List<Category> categories = categoryPersistencePort.findAllCategories();
         if (categories == null || categories.isEmpty()) {
-            throw new EmptyBrandListException(BRAND_LIST_EMPTY_EXCEPTION_MESSAGE);
+            throw new EmptyCategoryListException(CATEGORY_LIST_EMPTY_EXCEPTION_MESSAGE);
         }
         return sortCategories(categories, asc);
     }
@@ -41,6 +40,15 @@ public class CategoryUseCase implements ICategoryServicePort {
             throw new CategoryNotFoundException(CATEGORY_NOT_FOUND_EXCEPTION_MESSAGE);
         }
         return category;
+    }
+
+    @Override
+    public Category updateCategory(Category category, Long id) {
+        if(categoryPersistencePort.findCategoryById(id) == null){
+            throw new CategoryNotFoundException(CATEGORY_NOT_FOUND_EXCEPTION_MESSAGE);
+        }
+        category.setId(id);
+        return categoryPersistencePort.saveCategory(category);
     }
 
     private List<Category> sortCategories(List<Category> categories, Boolean asc) {
