@@ -5,6 +5,7 @@ import com.project_arka.stock.domain.exception.badrequest.CategoryInvalidExcepti
 import com.project_arka.stock.domain.exception.badrequest.SupplierInvalidException;
 import com.project_arka.stock.domain.exception.conflict.BrandAllreadyExistsException;
 import com.project_arka.stock.domain.exception.conflict.CategoryAllreadyExistsException;
+import com.project_arka.stock.domain.exception.conflict.SupplierAllreadyExistsException;
 import com.project_arka.stock.domain.exception.notfound.BrandNotFoundException;
 import com.project_arka.stock.domain.exception.notfound.CategoryNotFoundException;
 import com.project_arka.stock.domain.exception.notfound.EmptyBrandListException;
@@ -78,6 +79,12 @@ public class ControllerAdvisor {
     public ResponseEntity<ExceptionCodeResponse> handleSupplierInvalidException(SupplierInvalidException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                 new ExceptionCodeResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), HttpStatus.BAD_REQUEST.name(), LocalDateTime.now())
+        );
+    }
+    @ExceptionHandler(SupplierAllreadyExistsException.class)
+    public ResponseEntity<ExceptionCodeResponse> handleSupplierAllreadyExistsException(SupplierAllreadyExistsException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(
+                new ExceptionCodeResponse(HttpStatus.CONFLICT.value(), ex.getMessage(), HttpStatus.CONFLICT.name(), LocalDateTime.now())
         );
     }
 

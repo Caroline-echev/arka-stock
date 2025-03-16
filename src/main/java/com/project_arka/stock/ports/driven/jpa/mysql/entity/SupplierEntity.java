@@ -2,6 +2,7 @@ package com.project_arka.stock.ports.driven.jpa.mysql.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import static com.project_arka.stock.ports.driven.jpa.mysql.util.AdapterConstant
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class SupplierEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

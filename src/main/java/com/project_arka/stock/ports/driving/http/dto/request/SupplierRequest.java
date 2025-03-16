@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import static com.project_arka.stock.domain.util.DomainConstants.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class SupplierRequest {
 
     @NotNull(message = SUPPLIER_NIT_EMPTY_EXCEPTION_MESSAGE)

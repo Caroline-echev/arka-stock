@@ -2,12 +2,16 @@ package com.project_arka.stock.configuration.bean;
 
 import com.project_arka.stock.domain.api.IBrandServicePort;
 import com.project_arka.stock.domain.api.ICategoryServicePort;
+import com.project_arka.stock.domain.api.ISupplierServicePort;
 import com.project_arka.stock.domain.api.usecase.BrandUseCase;
 import com.project_arka.stock.domain.api.usecase.CategoryUseCase;
+import com.project_arka.stock.domain.api.usecase.SupplierUseCase;
 import com.project_arka.stock.domain.spi.IBrandPersistencePort;
 import com.project_arka.stock.domain.spi.ICategoryPersistencePort;
+import com.project_arka.stock.domain.spi.ISupplierPersistencePort;
 import com.project_arka.stock.ports.driven.jpa.mysql.adapter.BrandAdapter;
 import com.project_arka.stock.ports.driven.jpa.mysql.adapter.CategoryAdapter;
+import com.project_arka.stock.ports.driven.jpa.mysql.adapter.SupplierAdapter;
 import com.project_arka.stock.ports.driven.jpa.mysql.mapper.IBrandEntityMapper;
 import com.project_arka.stock.ports.driven.jpa.mysql.mapper.ICategoryEntityMapper;
 import com.project_arka.stock.ports.driven.jpa.mysql.repository.IBrandRepository;
@@ -66,5 +70,17 @@ class BeanConfigurationTest {
         ICategoryServicePort categoryServicePort = beanConfiguration.categoryServicePort();
         assertNotNull(categoryServicePort);
         assert(categoryServicePort instanceof CategoryUseCase);
+    }
+    @Test
+    void testSupplierPersistencePort() {
+        ISupplierPersistencePort supplierPersistencePort = beanConfiguration.supplierPersistencePort();
+        assertNotNull(supplierPersistencePort);
+        assert(supplierPersistencePort instanceof SupplierAdapter);
+    }
+    @Test
+    void testSupplierServicePort() {
+        ISupplierServicePort supplierServicePort = beanConfiguration.supplierServicePort();
+        assertNotNull(supplierServicePort);
+        assert(supplierServicePort instanceof SupplierUseCase);
     }
 }

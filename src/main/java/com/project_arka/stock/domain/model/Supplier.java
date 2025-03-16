@@ -1,8 +1,10 @@
 package com.project_arka.stock.domain.model;
 
 import com.project_arka.stock.domain.exception.badrequest.SupplierInvalidException;
-import static com.project_arka.stock.domain.util.DomainConstants.*;
+import lombok.Builder;
 
+import static com.project_arka.stock.domain.util.DomainConstants.*;
+@Builder
 public class Supplier {
 
     private Long id;

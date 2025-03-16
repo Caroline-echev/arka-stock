@@ -2,8 +2,10 @@ package com.project_arka.stock.configuration.exceptionhandler;
 
 import com.project_arka.stock.domain.exception.badrequest.BrandInvalidException;
 import com.project_arka.stock.domain.exception.badrequest.CategoryInvalidException;
+import com.project_arka.stock.domain.exception.badrequest.SupplierInvalidException;
 import com.project_arka.stock.domain.exception.conflict.BrandAllreadyExistsException;
 import com.project_arka.stock.domain.exception.conflict.CategoryAllreadyExistsException;
+import com.project_arka.stock.domain.exception.conflict.SupplierAllreadyExistsException;
 import com.project_arka.stock.domain.exception.notfound.BrandNotFoundException;
 import com.project_arka.stock.domain.exception.notfound.CategoryNotFoundException;
 import com.project_arka.stock.domain.exception.notfound.EmptyBrandListException;
@@ -112,5 +114,23 @@ class ControllerAdvisorTest {
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertEquals("Category not found", response.getBody().getMessage());
+    }
+
+    @Test
+    void handleSupplierInvalidException() {
+        SupplierInvalidException exception = new SupplierInvalidException("Invalid supplier");
+        ResponseEntity<ExceptionCodeResponse> response = controllerAdvisor.handleSupplierInvalidException(exception);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals("Invalid supplier", response.getBody().getMessage());
+    }
+
+    @Test
+    void handleSupplierAllreadyExistsException() {
+        SupplierAllreadyExistsException exception = new SupplierAllreadyExistsException("Supplier already exists");
+        ResponseEntity<ExceptionCodeResponse> response = controllerAdvisor.handleSupplierAllreadyExistsException(exception);
+
+        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+        assertEquals("Supplier already exists", response.getBody().getMessage());
     }
 }

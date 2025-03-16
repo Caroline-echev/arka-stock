@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 
 import static com.project_arka.stock.ports.driving.http.util.ApplicationConstants.SPRING_MAPPING;
 
-@Mapper(componentModel = SPRING_MAPPING, uses = IAddressMapperDto.class)
+@Mapper(componentModel = SPRING_MAPPING,uses = {IAddressMapperDto.class})
 public interface ISupplierMapperDto {
     SupplierResponse supplierToSupplierResponse(Supplier supplier);
     @Mapping(target = "id", ignore = true)
