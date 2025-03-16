@@ -1,4 +1,4 @@
-package com.project_arka.stock.domain.exception;
+package com.project_arka.stock.domain.exception.badrequest;
 
 public class CategoryInvalidException extends RuntimeException {
     public CategoryInvalidException(String message) {

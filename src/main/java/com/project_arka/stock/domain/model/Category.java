@@ -1,8 +1,7 @@
 package com.project_arka.stock.domain.model;
 
 
-import com.project_arka.stock.domain.exception.BrandInvalidException;
-import com.project_arka.stock.domain.exception.CategoryInvalidException;
+import com.project_arka.stock.domain.exception.badrequest.CategoryInvalidException;
 
 import static com.project_arka.stock.domain.util.DomainConstants.*;
 

@@ -1,6 +1,6 @@
 package com.project_arka.stock.domain.model;
 
-import com.project_arka.stock.domain.exception.CategoryInvalidException;
+import com.project_arka.stock.domain.exception.badrequest.CategoryInvalidException;
 import org.junit.jupiter.api.Test;
 
 

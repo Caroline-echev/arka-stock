@@ -1,6 +1,6 @@
 package com.project_arka.stock.domain.model;
 
-import com.project_arka.stock.domain.exception.BrandInvalidException;
+import com.project_arka.stock.domain.exception.badrequest.BrandInvalidException;
 import org.junit.jupiter.api.Test;
 
 import static com.project_arka.stock.domain.util.DomainConstants.*;
