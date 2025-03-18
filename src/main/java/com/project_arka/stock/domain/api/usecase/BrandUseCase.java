@@ -1,9 +1,9 @@
 package com.project_arka.stock.domain.api.usecase;
 
 import com.project_arka.stock.domain.api.IBrandServicePort;
-import com.project_arka.stock.domain.exception.BrandAllreadyExistsException;
-import com.project_arka.stock.domain.exception.BrandNotFoundException;
-import com.project_arka.stock.domain.exception.EmptyBrandListException;
+import com.project_arka.stock.domain.exception.conflict.BrandAllreadyExistsException;
+import com.project_arka.stock.domain.exception.notfound.BrandNotFoundException;
+import com.project_arka.stock.domain.exception.notfound.EmptyBrandListException;
 import com.project_arka.stock.domain.model.Brand;
 import com.project_arka.stock.domain.spi.IBrandPersistencePort;
 import lombok.RequiredArgsConstructor;

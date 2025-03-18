@@ -6,8 +6,11 @@ import com.project_arka.stock.ports.driving.http.dto.response.CategoryResponse;
 import com.project_arka.stock.ports.driving.http.mapper.ICategoryMapperDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -19,6 +22,25 @@ public class CategoryController {
 
     @PostMapping("/")
     public ResponseEntity<CategoryResponse> createBrand(@RequestBody @Valid CategoryRequest   categoryRequest) {
-        return ResponseEntity.ok(categoryMapperDto.categoryToCategoryResponse(categoryServicePort.createCategory(categoryMapperDto.categoryRequestToCategory(categoryRequest))));
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryMapperDto.categoryToCategoryResponse(categoryServicePort.createCategory(categoryMapperDto.categoryRequestToCategory(categoryRequest))));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CategoryResponse>> findAllCategories(@RequestParam(defaultValue = "true") boolean asc) {
+        List<CategoryResponse> categoryResponses = categoryServicePort.findAllCategories(asc)
+                .stream()
+                .map(categoryMapperDto::categoryToCategoryResponse)
+                .toList();
+        return ResponseEntity.ok(categoryResponses);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryResponse> findCategoryById(@PathVariable Long id) {
+        return ResponseEntity.ok(categoryMapperDto.categoryToCategoryResponse(categoryServicePort.findCategoryById(id)));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryResponse> updateCategory(@RequestBody @Valid CategoryRequest categoryRequest, @PathVariable Long id) {
+        return ResponseEntity.ok(categoryMapperDto.categoryToCategoryResponse(categoryServicePort.updateCategory(categoryMapperDto.categoryRequestToCategory(categoryRequest), id)));
     }
 }

@@ -12,5 +12,6 @@ import static com.project_arka.stock.ports.driving.http.util.ApplicationConstant
 @Mapper(componentModel = SPRING_MAPPING)
 public interface IBrandMapperDto {
    BrandResponse brandToBrandResponse(Brand brand);
+
    Brand brandToBrandRequest(BrandRequest brandRequest);
 }

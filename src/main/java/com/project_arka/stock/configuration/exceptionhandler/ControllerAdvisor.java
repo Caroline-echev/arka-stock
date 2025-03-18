@@ -1,9 +1,15 @@
 package com.project_arka.stock.configuration.exceptionhandler;
 
-import com.project_arka.stock.domain.exception.BrandAllreadyExistsException;
-import com.project_arka.stock.domain.exception.BrandInvalidException;
-import com.project_arka.stock.domain.exception.BrandNotFoundException;
-import com.project_arka.stock.domain.exception.EmptyBrandListException;
+import com.project_arka.stock.domain.exception.badrequest.BrandInvalidException;
+import com.project_arka.stock.domain.exception.badrequest.CategoryInvalidException;
+import com.project_arka.stock.domain.exception.badrequest.SupplierInvalidException;
+import com.project_arka.stock.domain.exception.conflict.BrandAllreadyExistsException;
+import com.project_arka.stock.domain.exception.conflict.CategoryAllreadyExistsException;
+import com.project_arka.stock.domain.exception.conflict.SupplierAllreadyExistsException;
+import com.project_arka.stock.domain.exception.notfound.BrandNotFoundException;
+import com.project_arka.stock.domain.exception.notfound.CategoryNotFoundException;
+import com.project_arka.stock.domain.exception.notfound.EmptyBrandListException;
+import com.project_arka.stock.domain.exception.notfound.EmptyCategoryListException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +30,7 @@ public class ControllerAdvisor {
     }
     @ExceptionHandler(BrandAllreadyExistsException.class)
     public ResponseEntity<ExceptionCodeResponse> handleBrandAllreadyExistsException(BrandAllreadyExistsException ex) {
-        return ResponseEntity.badRequest().body(new ExceptionCodeResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), HttpStatus.BAD_REQUEST.name(), LocalDateTime.now()));
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ExceptionCodeResponse(HttpStatus.CONFLICT.value(), ex.getMessage(), HttpStatus.BAD_REQUEST.name(), LocalDateTime.now()));
     }
     @ExceptionHandler(BrandNotFoundException.class)
     public ResponseEntity<ExceptionCodeResponse> handleBrandNotFoundException(BrandNotFoundException ex) {
@@ -44,4 +50,42 @@ public class ControllerAdvisor {
                 new ExceptionCodeResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage(), HttpStatus.NOT_FOUND.name(), LocalDateTime.now())
         );
     }
+    @ExceptionHandler(CategoryInvalidException.class)
+    public ResponseEntity<ExceptionCodeResponse> handleCategoryInvalidException(CategoryInvalidException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                new ExceptionCodeResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), HttpStatus.BAD_REQUEST.name(), LocalDateTime.now())
+        );
+    }
+    @ExceptionHandler(EmptyCategoryListException.class)
+    public ResponseEntity<ExceptionCodeResponse> handleEmptyCategoryListException(EmptyCategoryListException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                new ExceptionCodeResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage(), HttpStatus.NOT_FOUND.name(), LocalDateTime.now())
+        );
+    }
+    @ExceptionHandler(CategoryAllreadyExistsException.class)
+    public ResponseEntity<ExceptionCodeResponse> handleCategoryAllreadyExistsException(CategoryAllreadyExistsException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(
+                new ExceptionCodeResponse(HttpStatus.CONFLICT.value(), ex.getMessage(), HttpStatus.CONFLICT.name(), LocalDateTime.now())
+        );
+    }
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<ExceptionCodeResponse> handleCategoryNotFoundException(CategoryNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                new ExceptionCodeResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage(), HttpStatus.NOT_FOUND.name(), LocalDateTime.now())
+        );
+    }
+
+    @ExceptionHandler(SupplierInvalidException.class)
+    public ResponseEntity<ExceptionCodeResponse> handleSupplierInvalidException(SupplierInvalidException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                new ExceptionCodeResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), HttpStatus.BAD_REQUEST.name(), LocalDateTime.now())
+        );
+    }
+    @ExceptionHandler(SupplierAllreadyExistsException.class)
+    public ResponseEntity<ExceptionCodeResponse> handleSupplierAllreadyExistsException(SupplierAllreadyExistsException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(
+                new ExceptionCodeResponse(HttpStatus.CONFLICT.value(), ex.getMessage(), HttpStatus.CONFLICT.name(), LocalDateTime.now())
+        );
+    }
+
 }
